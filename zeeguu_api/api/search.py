@@ -5,7 +5,7 @@ from zeeguu_core.model.search import Search
 from zeeguu_core.model.search_filter import SearchFilter
 from zeeguu_core.model.search_subscription import SearchSubscription
 
-from zeeguu_core.content_recommender.mixed_recommender import article_search_for_user
+from zeeguu_core.content_recommender.mixed_recommender import article_search_for_user, article_search_for_user_fulltext
 
 from .utils.route_wrappers import cross_domain, with_session
 from .utils.json_result import json_result
@@ -186,4 +186,6 @@ def search_for_search_terms(search_terms):
     :return: json article list for the search term
 
     """
-    return json_result(article_search_for_user(flask.g.user, 20, search_terms))
+    res1 = article_search_for_user(flask.g.user, 20, search_terms)
+    res = article_search_for_user_fulltext(flask.g.user, 20, search_terms)
+    return json_result(res)
