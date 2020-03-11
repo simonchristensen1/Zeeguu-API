@@ -19,7 +19,7 @@ def article_id():
         returns the article at that URL or creates an article and returns it
 
         takes url as URL argument
-        NOTE: the url should be encoded with quote_plus (Pyton) and encodeURIComponent(Javascript)
+        NOTE: the url should be encoded with quote_plus (Python) and encodeURIComponent(Javascript)
 
 
     :return: article id

@@ -125,7 +125,7 @@ def subscribe_to_filter_with_id():
 
     :return: "OK" in case of success
     """
-
+    # TODO maybe rename to topic_id like the rest
     filter_id = int(request.form.get('filter_id', ''))
 
     filter_object = Topic.find_by_id(filter_id)
