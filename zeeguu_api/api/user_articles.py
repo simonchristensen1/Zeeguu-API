@@ -1,6 +1,7 @@
 import flask
 import zeeguu_core
-from zeeguu_core.content_recommender.mixed_recommender import article_recommendations_for_user, cohort_articles_for_user
+from zeeguu_core.content_recommender.elastic_recommender import article_recommendations_for_user, \
+    cohort_articles_for_user
 from zeeguu_core.model import UserArticle, UserReadingSession, User
 
 from .utils.route_wrappers import cross_domain, with_session

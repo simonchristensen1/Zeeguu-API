@@ -5,7 +5,7 @@ from zeeguu_core.model.search import Search
 from zeeguu_core.model.search_filter import SearchFilter
 from zeeguu_core.model.search_subscription import SearchSubscription
 
-from zeeguu_core.content_recommender.mixed_recommender import article_search_for_user, article_search_for_user_elastic
+from zeeguu_core.content_recommender.elastic_recommender import article_search_for_user, more_like_this_article
 
 from .utils.route_wrappers import cross_domain, with_session
 from .utils.json_result import json_result
@@ -20,6 +20,7 @@ SUBSCRIBED_SEARCHES = "subscribed_searches"
 FILTER_SEARCH = "filter_search"
 UNFILTER_SEARCH = "unfilter_search"
 FILTERED_SEARCHES = "filtered_searches"
+MORE_LIKE_THIS = "more_like_this"
 
 
 # ---------------------------------------------------------------------------
@@ -185,9 +186,29 @@ def search_for_search_terms(search_terms):
     :return: json article list for the search term
 
     """
-    # Old way searching
-    # res = article_search_for_user(flask.g.user, 20, search_terms)
+    res = article_search_for_user(flask.g.user, 20, search_terms)
 
-    res = article_search_for_user_elastic(flask.g.user, 20, search_terms)
+    return json_result(res)
+
+
+# ---------------------------------------------------------------------------
+@api.route(f"/{MORE_LIKE_THIS}/<article_id>", methods=("GET",))
+# ---------------------------------------------------------------------------
+@cross_domain
+@with_session
+def more_like_this_search(article_id):
+    """
+    This endpoint is used for the standard search.
+    It passes the search terms to the mixed_recommender function
+    and returns the articles in a json format as a list.
+
+    :param search_terms:
+    :return: json article list for the search term
+
+    """
+
+    article_id = int(article_id)
+
+    res = more_like_this_article(flask.g.user, 20, article_id)
 
     return json_result(res)
