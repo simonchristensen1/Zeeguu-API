@@ -198,12 +198,10 @@ def search_for_search_terms(search_terms):
 @with_session
 def more_like_this_search(article_id):
     """
-    This endpoint is used for the standard search.
-    It passes the search terms to the mixed_recommender function
-    and returns the articles in a json format as a list.
+    Given a specific article ID finds articles that should deal with the same topics/theme as the given article.
 
-    :param search_terms:
-    :return: json article list for the search term
+    :param article_id:
+    :return: json article list for more like the article_id
 
     """
 
